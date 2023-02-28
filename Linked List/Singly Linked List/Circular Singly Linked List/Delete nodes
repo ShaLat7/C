@@ -1,0 +1,72 @@
+//Deleting nodes from a circular singly linked list
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+struct node *p=NULL, *q, *last, *tmp;
+
+void beginning(){
+    tmp = p;
+    p = p->next;
+    last->next = p;
+    free(tmp);
+}
+
+void end(){
+   do{
+        if(q->next==last){
+            tmp = last;
+            q->next = p;
+            last=q;
+            free(tmp);
+        }
+        q=q->next;
+    }while(q!=p); 
+}
+
+void main(){
+    int d, choice, c;
+    do{
+       if(p==NULL){
+           p = (struct node *)malloc(sizeof(struct node));
+           q=p;
+       }
+       else{
+           q->next = (struct node *)malloc(sizeof(struct node));
+           q = q->next;
+       }
+       printf("Enter data : ");
+       scanf("%d", &d);
+       q->data = d;
+       q->next = p;
+       printf("Press 1 to enter more data and 0 to end : ");
+       scanf("%d", &choice);
+       if(choice==0){
+           last = q;
+       }
+    }while(choice==1);
+    q=p;
+    printf("\nThe circular singly linked list is :\n");
+    do{
+        printf("%d\t", q->data);
+        q=q->next;
+    }while(q!=p);
+    q=p;
+    printf("\n\nPress 1 to delete 1st node and 2 to delete last node : ");
+    scanf("%d", &c);
+    switch(c){
+        case 1: beginning();
+        break;
+        case 2: end();
+        break;
+    }
+    q=p;
+    printf("\nAfter deletion :\n");
+    do{
+        printf("%d\t", q->data);
+        q=q->next;
+    }while(q!=p);
+    q=p;
+}
