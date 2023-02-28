@@ -1,0 +1,51 @@
+//Search for an element in a singly linked list (does not check for duplicate entries)
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+struct node *p=NULL, *q, *last;
+void main(){
+    int d, choice, count=1, target, flag=0;
+    do{
+        if(p==NULL){
+            p = (struct node *)malloc(sizeof(struct node));
+            q=p;
+        }
+        else{
+            q->next = (struct node *)malloc(sizeof(struct node));
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+        if(choice==0)
+        last = q;
+    }while(choice==1);
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+    q=p;
+    printf("\n\nSearching for an element :\n");
+    printf("Enter the target value : ");
+    scanf("%d", &target);
+    while(q!=NULL){
+        if(q->data == target){
+            flag=1;
+            break;
+        }
+        count++;
+        q = q->next;
+    }
+    if(flag==0)
+    printf("\nElement %d not found", target);
+    
+    else
+    printf("\nElement %d found at position %d", target, count);
+}
