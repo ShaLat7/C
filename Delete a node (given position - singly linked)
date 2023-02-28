@@ -1,0 +1,55 @@
+//Deleting a node from the given position in a singly linked list
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+struct node *p=NULL, *q, *tmp, *last;
+void main(){
+    int d, choice, pos, count=1;
+    do{
+        if(p==NULL){
+            p = (struct node *)malloc(sizeof(struct node));
+            q=p;
+        }
+        else{
+            q->next = (struct node *)malloc(sizeof(struct node));
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+        if(choice==0)
+        last = q;
+    }while(choice==1);
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+    q=p;
+    printf("\n\nDeleting node from the given position :\n");
+    printf("Enter the location : ");
+    scanf("%d", &pos);
+    tmp = (struct node *)malloc(sizeof(struct node));
+    while(q!=NULL){
+        if(count+1 == pos){
+            tmp = q->next;
+            q->next = tmp->next;
+            free(tmp);
+            break;
+        }
+        q = q->next;
+        count++;
+    }
+    q=p;
+    printf("The singly linked list is :\n");
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+}
