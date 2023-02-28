@@ -1,0 +1,50 @@
+//Deleting a node from a singly linked list based on the value contained 
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+struct node *p=NULL, *q, *tmp;
+
+void main(){
+    int d, choice, target;
+    do{
+       if(p==NULL){
+           p = (struct node *)malloc(sizeof(struct node));
+           q=p;
+       }
+       else{
+           q->next = (struct node *)malloc(sizeof(struct node));
+           q = q->next;
+       }
+       printf("Enter data : ");
+       scanf("%d", &d);
+       q->data = d;
+       q->next = NULL;
+       printf("Press 1 to enter more data and 0 to end : ");
+       scanf("%d", &choice);
+    }while(choice==1);
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+    q=p;
+    printf("\nEnter the target value : ");
+    scanf("%d", &target);
+    while(q!=NULL){
+        if(q->next->data == target){
+            tmp = q->next;
+            q->next = tmp->next;
+            free(tmp);
+            break;
+        }
+        q = q->next;
+    }
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+}
