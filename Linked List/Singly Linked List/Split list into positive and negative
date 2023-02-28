@@ -1,0 +1,76 @@
+//Splitting a singly linked list into positive and negative lists
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+struct node *p=NULL, *q, *pos=NULL, *neg=NULL, *pq, *nq;
+
+void main(){
+    int d, choice;
+    do{
+        if(p==NULL){
+            p = (struct node *)malloc(sizeof(struct node));
+            q=p;
+        }
+        else{
+            q->next = (struct node *)malloc(sizeof(struct node));
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+    }while(choice==1);
+    q=p;
+    printf("\nThe original list is :\n");
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+    q=p;
+    while(q!=NULL){
+        if(q->data<0){
+          if(neg==NULL){
+              neg = (struct node *)malloc(sizeof(struct node));
+              nq = neg;
+          }
+          else{
+              nq->next = (struct node *)malloc(sizeof(struct node));
+              nq = nq->next;
+          }
+          nq->data = q->data;
+          nq->next=NULL;
+        }
+        
+        else{
+          if(pos==NULL){
+              pos = (struct node *)malloc(sizeof(struct node));
+              pq = pos;
+          }
+          else{
+              pq->next = (struct node *)malloc(sizeof(struct node));
+              pq = pq->next;
+          }
+          pq->data = q->data;
+          pq->next=NULL;
+        }
+        q=q->next;
+    }
+    nq = neg;
+    pq = pos;
+    
+    printf("\n\nThe negative list :\n");
+    while(nq!=NULL){
+        printf("%d\t", nq->data);
+        nq = nq->next;
+    }
+    printf("\n\nThe positive list :\n");
+    while(pq!=NULL){
+        printf("%d\t", pq->data);
+        pq = pq->next;
+    }
+}
