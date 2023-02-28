@@ -1,0 +1,122 @@
+//Switch case to keep inserting nodes in a doubly linked list and print list in forward and reverse order
+#include <stdio.h>
+#include <stdlib.h>
+struct dnode{
+    struct dnode * prev;
+    int data;
+    struct dnode * next;
+};
+struct dnode *p=NULL, *q, *last, *tmp;
+
+void beginning(){
+    int d;
+    printf("\nEnter data for node : ");
+    scanf("%d", &d);
+    tmp->data = d;
+    tmp->prev = NULL;
+    tmp->next = p;
+    p->prev = tmp;
+    p = tmp;
+}
+
+void given_pos(){
+    int d;
+    printf("\nEnter data for node : ");
+    scanf("%d", &d);
+    tmp->data = d;
+    int pos, count=1;
+    printf("\nEnter the location : ");
+    scanf("%d", &pos);
+    while(q!=NULL){
+        if(count==pos){
+            tmp->prev = q->prev;
+            q->prev->next = tmp;
+            tmp->next = q;
+            q->prev = tmp;
+        }
+        q=q->next;
+        count++;
+    }
+}
+
+void end(){
+    int d;
+    printf("\nEnter data for node : ");
+    scanf("%d", &d);
+    tmp->data = d;
+    tmp->prev = last;
+    tmp->next = NULL;
+    last->next = tmp;
+    last = tmp;
+}
+
+void printList(){
+    q=p;
+    printf("\nList :\n");
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q=q->next;
+    }
+    q=p;
+}
+
+void reverseList(){
+    q=last;
+    printf("\nReverse list :\n");
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q=q->prev;
+    }
+    q=p;
+}
+void main(){
+    int d, choice, c, ans;
+    do{
+        if(p==NULL){
+            p = (struct dnode *)malloc(sizeof(struct dnode));
+            p->prev=NULL;
+            q=p;
+        }
+        else{
+            q->next = (struct dnode *)malloc(sizeof(struct dnode));
+            q->next->prev = q;
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+        if(choice!=1)
+        last = q;
+    }while(choice==1);
+    q=p;
+    printf("\nThe doubly linked list is :\n");
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q=q->next;
+    }
+    q=p;
+    do{
+        printf("\n\nInserting a node :\nPress 1 to insert the node at the beginning\nPress 2 to insert node at a given position\nPress 3 to insert the node at the end\nPress 4 to print the list\nPress 5 to print the list in the reverse order\nPress 6 to exit : ");
+        scanf("%d", &c);
+        tmp = (struct dnode *)malloc(sizeof(struct dnode));
+        switch(c){
+            case 1: beginning();
+            break;
+            case 2: given_pos();
+            break;
+            case 3: end();
+            break;
+            case 4: printList();
+            break;
+            case 5: reverseList();
+            break;
+            case 6: ans = 1;
+            break;
+            default: printf("Invalid entry!");
+        }
+    }while(ans!=1);
+    printf("Thank you!");
+}
