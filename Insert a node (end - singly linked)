@@ -1,0 +1,41 @@
+//Inserting a node at the end in a singly linked list
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+struct node *p=NULL, *q, *tmp, *last;
+void main(){
+    int d, choice;
+    do{
+        if(p==NULL){
+            p = (struct node *)malloc(sizeof(struct node));
+            q=p;
+        }
+        else{
+            q->next = (struct node *)malloc(sizeof(struct node));
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+        if(choice==0)
+        last = q;
+    }while(choice==1);
+    q=p;
+    printf("\nInserting node at the end :\nEnter data : ");
+    scanf("%d", &d);
+    tmp = (struct node *)malloc(sizeof(struct node));
+    tmp->data = d;
+    tmp->next = NULL;
+    last->next = tmp;
+    printf("The singly linked list is :\n");
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+}
