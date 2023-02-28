@@ -4,7 +4,7 @@ struct node{
     int data;
     struct node * next;
 };
-struct node *p=NULL, *q, *tmp;
+struct node *p=NULL, *q;
 void main(){
     int d, choice;
     do{
@@ -24,15 +24,10 @@ void main(){
         scanf("%d", &choice);
     }while(choice==1);
     q=p;
-    printf("Inserting node at the beginning :\nEnter data : ");
-    scanf("%d", &d);
-    tmp = (struct node *)malloc(sizeof(struct node));
-    tmp->data = d;
-    tmp->next = p;
-    p=tmp;
     printf("The singly linked list is :\n");
     while(q!=NULL){
         printf("%d\t", q->data);
         q = q->next;
     }
 }
+
