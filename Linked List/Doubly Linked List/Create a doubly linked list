@@ -1,0 +1,44 @@
+//Creating a doubly linked list
+#include <stdio.h>
+#include <stdlib.h>
+struct dnode{
+    struct dnode * prev;
+    int data;
+    struct dnode * next;
+};
+struct dnode *p=NULL, *q, *last;
+void main(){
+    int d, choice;
+    do{
+        if(p==NULL){
+            p = (struct dnode *)malloc(sizeof(struct dnode));
+            p->prev = NULL;
+            q=p;
+        }
+        else{
+            q->next = (struct dnode *)malloc(sizeof(struct dnode));
+            q->next->prev = q;
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+        if(choice==0)
+        last = q;
+    }while(choice==1);
+    printf("\n\nThe doubly linked list is :\n");
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+    printf("\n\nThe list in the reverse order is :\n");
+    q=last;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->prev;
+    }
+}
