@@ -1,0 +1,85 @@
+//Deleting a node from a doubly linked list (all three cases)
+#include <stdio.h>
+#include <stdlib.h>
+struct dnode{
+    struct dnode * prev;
+    int data;
+    struct dnode * next;
+};
+struct dnode *p=NULL, *q, *last, *tmp;
+
+void beginning(){
+    tmp = p;
+    p->next->prev = NULL;
+    p = p->next;
+    free(tmp);
+}
+
+void given_pos(){
+    int count=1, pos;
+    printf("Enter the location of the element to be deleted : ");
+    scanf("%d", &pos);
+    q=p;
+    while(q!=NULL){
+        if(count+1==pos){
+            tmp = q->next;
+            tmp->next->prev = q;
+            q->next = tmp->next;
+            free(tmp);
+        }
+        q = q->next;
+        count++;
+    }
+}
+
+void end(){
+    tmp = last;
+    last->prev->next = NULL;
+    q = last;
+    free(tmp);
+}
+
+void main(){
+    int d, choice, c;
+    do{
+        if(p==NULL){
+            p = (struct dnode *)malloc(sizeof(struct dnode));
+            p->prev = NULL;
+            q=p;
+        }
+        else{
+            q->next = (struct dnode *)malloc(sizeof(struct dnode));
+            q->next->prev = q;
+            q = q->next;
+        }
+        printf("Enter data : ");
+        scanf("%d", &d);
+        q->data = d;
+        q->next = NULL;
+        printf("Press 1 to enter more data and 0 to end : ");
+        scanf("%d", &choice);
+        if(choice==0)
+        last = q;
+    }while(choice==1);
+    printf("\n\nThe doubly linked list is :\n");
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+    tmp = (struct dnode *)malloc(sizeof(struct dnode));
+    printf("\n\nDeleting a node :\nPress 1 for the 1st node to be deleted\nPress 2 for the node at a given position to be deleted\nPress 3 for the node at the end to be deleted : ");
+    scanf("%d", &c);
+    switch(c){
+        case 1: beginning();
+        break;
+        case 2: given_pos();
+        break;
+        case 3: end();
+    }
+    q=p;
+    while(q!=NULL){
+        printf("%d\t", q->data);
+        q = q->next;
+    }
+}
