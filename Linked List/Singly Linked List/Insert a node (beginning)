@@ -6,6 +6,7 @@ struct node{
     struct node * next;
 };
 struct node *p=NULL, *q, *tmp;
+
 void main(){
     int d, choice;
     do{
