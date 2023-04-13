@@ -1,0 +1,28 @@
+#include <stdio.h>
+void main(){
+    int i, n, target, flag = 0;
+    printf("Enter the size of the array : ");
+    scanf("%d", &n);
+    int arr[n];
+    
+    printf("\nEnter the elements one by one :\n");
+    for(i=0; i<n; i++){
+        scanf("%d", &arr[i]);
+    }
+    printf("\nThe entered array is :\n");
+    for(i=0; i<n; i++){
+        printf("%d\t", arr[i]);
+    }
+    
+    printf("\nEnter the target element : ");
+    scanf("%d", &target);
+    for(i=0; i<n; i++){
+        if(arr[i] == target){
+            flag = 1;
+            printf("\nElement %d found at position %d", target, i+1);
+        }
+    }
+    if(flag==0){
+        printf("\nElement %d not found");
+    }
+}
